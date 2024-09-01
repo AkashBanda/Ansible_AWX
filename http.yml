@@ -2,4 +2,4 @@
   tasks:
     - yum:
         name: "httpd"
-        state: absent
+        state: present
