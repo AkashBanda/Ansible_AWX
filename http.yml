@@ -4,3 +4,9 @@
     - yum:
         name: "httpd"
         state: present
+    - service:
+        name: "httpd"
+        state: started
+    - copy:
+        content: "This is akash banda cicd"
+        dest: "/var/www/html/index.html"
