@@ -7,5 +7,5 @@
         name: "httpd"
         state: started
     - copy:
-        content: "This is testing"
+        content: "This is updated"
         dest: "/var/www/html/index.html"
