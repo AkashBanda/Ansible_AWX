@@ -8,5 +8,5 @@
         name: "httpd"
         state: started
     - copy:
-        content: "This is akash banda cicd"
+        content: "This is testing"
         dest: "/var/www/html/index.html"
