@@ -7,5 +7,5 @@
         name: "httpd"
         state: started
     - copy:
-        content: "Deployment is going on {{service}}"
+        content: "Deployment is going on for testing purpose"
         dest: "/var/www/html/index.html"
