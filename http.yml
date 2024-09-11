@@ -7,5 +7,5 @@
         name: "httpd"
         state: started
     - copy:
-        content: "Deployment is going on for ansible"
+        content: "Deployment is going on for git pull"
         dest: "/var/www/html/index.html"
