@@ -1,2 +1,5 @@
 - hosts: all
-  tasks: []
+  tasks:
+   - copy:
+      content: "This is testing file"
+      dest: "/tmp/test.txt"
