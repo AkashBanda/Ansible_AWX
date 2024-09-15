@@ -19,7 +19,7 @@
 
     - name: Determine the next available backup number
       set_fact:
-        next_backup_number: "{{ (backup_dirs.matched > 0) | ternary((backup_dirs.files | map(attribute='path') | map('basename') | map('int') | max | int + 1), 1) }}"
+        next_backup_number: "{{ (backup_dirs.files | map(attribute='path') | map('basename') | map('int') | default([0]) | max) + 1 }}"
 
     - name: Create the next numbered backup directory
       ansible.builtin.file:
