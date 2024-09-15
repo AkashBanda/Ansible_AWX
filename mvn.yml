@@ -5,24 +5,24 @@
      - name: "MVN running on MobifinMainModule"
        command:
           cmd: "mvn clean install"
-          chdir: "/home/akash.banda/GIT/MFS-WizallMW/MobifinMainModule"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/MobifinMainModule"
 
      - name: "MVN running on RedisDataProvider"
        command:
           cmd: "mvn clean install"
-          chdir: "/home/akash.banda/GIT/MFS-WizallMW/RedisDataProvider"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/RedisDataProvider"
 
      - name: "MVN running on DatabaseServiceProvider"
        command:
           cmd: "mvn clean install"
-          chdir: "/home/akash.banda/GIT/MFS-WizallMW/DatabaseServiceProvider"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/DatabaseServiceProvider"
 
      - name: "MVN running on TransactionModule"
        command:
           cmd: "mvn clean install"
-          chdir: "/home/akash.banda/GIT/MFS-WizallMW/TransactionModule"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/TransactionModule"
 
      - name: "MVN running on {{ service }}"
        command:
           cmd: "mvn clean install"
-          chdir: "/home/akash.banda/GIT/MFS-WizallMW/{{ service }}"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}"
