@@ -16,13 +16,13 @@
         file_type: directory
         patterns: '[0-9]+'
       register: backup_dirs
-    - name: Debug backup directories found
+    - name: Debug directories found
       debug:
         var: backup_dirs.files
 
     - name: Set fact if any backup directories exist
       set_fact:
-        directories_exist: "{{ backup_dirs.matched > 0 }}"
+        directories_exist: "{{ backup_dirs.files | length > 0 }}"
 
     - name: Debug if directories exist
       debug:
@@ -32,7 +32,7 @@
       set_fact:
         next_backup_number: >
           {% if directories_exist %}
-            {{ (backup_dirs.files | map(attribute='path') | map('basename') | map('int') | max + 1) }}
+            {{ backup_dirs.files | map(attribute='path') | map('basename') | map('int') | max + 1 }}
           {% else %}
             1
           {% endif %}
