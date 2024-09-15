@@ -16,9 +16,17 @@
         file_type: directory
         patterns: '[0-9]+'
       register: backup_dirs
+    - name: Debug backup directories found
+      debug:
+        var: backup_dirs.files
+
     - name: Set fact if any backup directories exist
       set_fact:
-        directories_exist: "{{ backup_dirs.matched > 0 }}"  
+        directories_exist: "{{ backup_dirs.matched > 0 }}"
+
+    - name: Debug if directories exist
+      debug:
+        var: directories_exist
 
     - name: Determine the next available backup number
       set_fact:
@@ -28,7 +36,9 @@
           {% else %}
             1
           {% endif %}
-
+    - name: Debug next backup number
+      debug:
+        msg: "Next backup number is {{ next_backup_number }}"      
     - name: Create the next numbered backup directory
       ansible.builtin.file:
         path: "/opt/backup/SN/{{ current_date.stdout }}/{{ next_backup_number }}"
