@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars_files:
+     - /root/Ansible/var.yml
+  tasks:
+     - name: "MVN running on MobifinMainModule"
+       command:
+          cmd: "mvn clean install"
+          chdir: "/home/akash.banda/GIT/MFS-WizallMW/MobifinMainModule"
+
+     - name: "MVN running on RedisDataProvider"
+       command:
+          cmd: "mvn clean install"
+          chdir: "/home/akash.banda/GIT/MFS-WizallMW/RedisDataProvider"
+
+     - name: "MVN running on DatabaseServiceProvider"
+       command:
+          cmd: "mvn clean install"
+          chdir: "/home/akash.banda/GIT/MFS-WizallMW/DatabaseServiceProvider"
+
+     - name: "MVN running on TransactionModule"
+       command:
+          cmd: "mvn clean install"
+          chdir: "/home/akash.banda/GIT/MFS-WizallMW/TransactionModule"
+
+     - name: "MVN running on {{ service }}"
+       command:
+          cmd: "mvn clean install"
+          chdir: "/home/akash.banda/GIT/MFS-WizallMW/{{ service }}"
