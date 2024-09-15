@@ -1,0 +1,28 @@
+- hosts: all
+  tasks:
+    - name: Get the current date in YYYY-MM-DD format
+      ansible.builtin.command: "date +%F"
+      register: current_date
+
+    - name: Ensure the date-based backup directory exists
+      ansible.builtin.file:
+        path: "/opt/backup/SN/{{ current_date.stdout }}"
+        state: directory
+        mode: '0755'
+
+    - name: Find the highest existing numbered directory under the date directory
+      ansible.builtin.find:
+        paths: "/opt/backup/SN/{{ current_date.stdout }}"
+        file_type: directory
+        patterns: '[0-9]+'
+      register: backup_dirs
+
+    - name: Determine the next available backup number
+      set_fact:
+        next_backup_number: "{{ (backup_dirs.files | map(attribute='path') | map('basename') | map('int') | max | default(0)) + 1 }}"
+
+    - name: Create the next numbered backup directory
+      ansible.builtin.file:
+        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ next_backup_number }}"
+        state: directory
+        mode: '0755'
