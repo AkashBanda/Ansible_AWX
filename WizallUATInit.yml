@@ -3,4 +3,4 @@
     - name: Wizall UAT Deployment Service Setting up
       template:
          src: "/root/Ansible/WizallUATInit.j2"
-         dest: "/root/Ansible/var.txt"
+         dest: "/root/Ansible/var.yml"
