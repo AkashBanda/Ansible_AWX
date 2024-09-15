@@ -1,7 +1,4 @@
 - hosts: all
-  vars:
-   - service:
-       - {{ service }}
   tasks:
     - name: Wizall UAT Deployment Service Setting up
       template:
