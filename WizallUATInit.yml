@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+    - name: Wizall UAT Deployment Service Setting up
+      template:
+         src: "/root/Ansible/WizallUATInit.j2"
+         dest: "/root/Ansible/var.txt"
