@@ -16,6 +16,9 @@
         file_type: directory
         patterns: '[0-9]+'
       register: backup_dirs
+    - name: Set fact if any backup directories exist
+      set_fact:
+        directories_exist: "{{ backup_dirs.matched > 0 }}"  
 
     - name: Determine the next available backup number
       set_fact:
