@@ -20,4 +20,10 @@
     - name: Printing output for dir 1 created
       debug:
         msg: "{{ dir }}"
-     
+
+    - name: Creating Directory for Backup
+      file:
+        path: "/opt/backup/SN/{{ current_date.stdout }}/2"
+        state: directory
+        mode: "0755"
+      when: dir.changed == false
