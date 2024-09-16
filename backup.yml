@@ -19,5 +19,5 @@
         
     - name: Printing output for dir 1 created
       debug:
-        msg: {{ dir }}
+        msg: "{{ dir }}"
      
