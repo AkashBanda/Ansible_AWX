@@ -14,5 +14,5 @@
       file:
         path: "/opt/backup/SN/{{ current_date.stdout }}/1"
         state: directory
-        mode" "0755"
+        mode: "0755"
      
