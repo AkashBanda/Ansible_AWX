@@ -10,37 +10,9 @@
         state: directory
         mode: '0755'
 
-    - name: Find the highest existing numbered directory under the date directory
-      ansible.builtin.find:
-        paths: "/opt/backup/SN/{{ current_date.stdout }}"
-        file_type: directory
-        patterns: '[0-9]+'
-      register: backup_dirs
-    - name: Debug directories found
-      debug:
-        var: backup_dirs.files
-
-    - name: Set fact if any backup directories exist
-      set_fact:
-        directories_exist: "{{ backup_dirs.files | length > 0 }}"
-
-    - name: Debug if directories exist
-      debug:
-        var: directories_exist
-
-    - name: Determine the next available backup number
-      set_fact:
-        next_backup_number: >
-          {% if directories_exist %}
-            {{ backup_dirs.files | map(attribute='path') | map('basename') | map('int') | max + 1 }}
-          {% else %}
-            1
-          {% endif %}
-    - name: Debug next backup number
-      debug:
-        msg: "Next backup number is {{ next_backup_number }}"      
-    - name: Create the next numbered backup directory
-      ansible.builtin.file:
-        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ next_backup_number }}"
+    - name: Creating directory under date directory
+      file:
+        path: "/opt/backup/SN/{{ current_date.stdout }}/1"
         state: directory
-        mode: '0755'
+        mode" "0755"
+     
