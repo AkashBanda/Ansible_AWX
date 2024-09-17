@@ -1,4 +1,6 @@
 - hosts: all
+  vars_files:
+    - /root/Ansible/var.yml
   tasks:
     - name: Get the current date in YYYY-MM-DD format
       ansible.builtin.command: "date +%F"
