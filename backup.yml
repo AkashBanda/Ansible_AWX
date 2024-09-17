@@ -9,17 +9,6 @@
         path: "/opt/backup/SN/{{ current_date.stdout }}"
         state: directory
         mode: '0755'
-
-    - name: Creating directory under date directory
-      file:
-        path: "/opt/backup/SN/{{ current_date.stdout }}/1"
-        state: directory
-        mode: "0755"
-      register: dir
-        
-    - name: Printing output for dir 1 created
-      debug:
-        msg: "{{ dir }}"
         
     - shell: "ls | wc -l"
       args:
@@ -34,4 +23,3 @@
         path: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}"
         state: directory
         mode: "0755"
-      when: dir.changed == false
