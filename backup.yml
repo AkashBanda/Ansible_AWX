@@ -40,4 +40,10 @@
          remote_src: yes
       when: service == "ManagementServices"
 
+    - name: Restarting ManagementServices
+      service:
+         name: "SN_MFS_Mgnt.service"
+         state: "restarted"
+         
+
       
