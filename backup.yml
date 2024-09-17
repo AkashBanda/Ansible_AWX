@@ -25,3 +25,10 @@
         path: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}"
         state: directory
         mode: "0755"
+
+     - name: Taking backup for ManagementServices
+       copy:
+         src: "/opt/Application/SN_Wizall/MobifinApps/Management/Apps/ManagementServices.jar"
+         dest: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
+         remote_src: yes
+       when: service == "ManagementServices" 
