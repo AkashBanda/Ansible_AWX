@@ -20,10 +20,18 @@
     - name: Printing output for dir 1 created
       debug:
         msg: "{{ dir }}"
+        
+    - shell: "ls | wc -l"
+      args:
+        chdir: "/opt/backup/SN/{{ current_date.stdout }}/"
+      register: count
+
+    - set_fact:
+        b: "{{ count.stdout | int + 1 }}" 
 
     - name: Creating Directory for Backup
       file:
-        path: "/opt/backup/SN/{{ current_date.stdout }}/2"
+        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}"
         state: directory
         mode: "0755"
       when: dir.changed == false
