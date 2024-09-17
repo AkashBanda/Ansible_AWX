@@ -26,9 +26,18 @@
         state: directory
         mode: "0755"
 
-    - name: Taking backup for ManagementServices
+    - name: Taking backup for ManagementServices.jar
       copy:
          src: "/opt/Application/SN_Wizall/MobifinApps/Management/Apps/ManagementServices.jar"
          dest: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
          remote_src: yes
       when: service == "ManagementServices" 
+
+    - name: Taking backup for ManagementServices dependencies
+      copy:
+         src: "/opt/Application/SN_Wizall/MobifinApps/Management/dependencies"
+         dest: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
+         remote_src: yes
+      when: service == "ManagementServices"
+
+      
