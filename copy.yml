@@ -4,3 +4,4 @@
       copy:
         src: "/home/akash.banda/test.txt"
         dest: "/tmp/"
+        remote_src: yes
