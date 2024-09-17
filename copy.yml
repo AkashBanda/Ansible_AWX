@@ -1,0 +1,6 @@
+- hosts: 10.30.150.224
+  tasks:
+    - name: Copy file from controller's /opt to target node's /tmp
+      copy:
+        src: "/home/akash.banda/test.txt"
+        dest: "/tmp/"
