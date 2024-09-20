@@ -11,10 +11,16 @@
         path: "/opt/backup/SN/{{ current_date.stdout }}"
         state: directory
         mode: '0755'
+
+    - name: Ensure the Service-based backup directory exists
+      ansible.builtin.file:
+        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}"
+        state: directory
+        mode: '0755'    
         
     - shell: "ls | wc -l"
       args:
-        chdir: "/opt/backup/SN/{{ current_date.stdout }}/"
+        chdir: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}/"
       register: count
 
     - set_fact:
@@ -22,7 +28,7 @@
 
     - name: Creating Directory for Backup
       file:
-        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}"
+        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}"
         state: directory
         mode: "0755"
 
@@ -83,15 +89,15 @@
       when: service == "ReportService"  
         
     - name: Taking backup for {{ service }}.jar
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service != "InternalTrnService"
 
     - name: Taking backup for InternalTransactionService.jar
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service == "InternalTrnService"
 
     - name: Taking backup for {{ service }} dependencies directory
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
 #      when: service == "ManagementServices"
 
     - name: Depploying {{ service }}.jar on {{ service2 }} service
