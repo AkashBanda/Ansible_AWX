@@ -53,12 +53,18 @@
       copy: 
          src: "/root/Ansible/Wizall/MFS-WizallMW/ManagementServices/target/ManagementServices.jar"
          dest: "/home/akash.banda/Wizall/Management/Apps/"
-      when: service == "ManagementServices" 
+         owner: "mobifin"
+         group: "mobifin"
+         mode: "0755"
+      when: service == "ManagementServices"
 
     - name: Deploying Management dependencies on Management Service
       copy:
          src: "/root/Ansible/Wizall/MFS-WizallMW/ManagementServices/target/dependency-jars/"
          dest: "/home/akash.banda/Wizall/Management/dependencies/"
+         owner: "mobifin"
+         group: "mobifin"
+         mode: "0755"
       when: service == "ManagementServices"   
 
     - name: Restarting ManagementServices
