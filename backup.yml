@@ -56,25 +56,14 @@
         
     - name: Taking backup for {{ service }}.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
-#      when: service == "ManagementServices"
-      
-#    - name: Taking backup for ManagementServices.jar
-#      copy:
-#         src: "/opt/Application/SN_Wizall/MobifinApps/Management/Apps/ManagementServices.jar"
-#         dest: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
-#         remote_src: yes
-#      when: service == "ManagementServices" 
+      when: service != "InternalTrnService"
 
+    - name: Taking backup for InternalTransactionService.jar
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
+      when: service == "InternalTrnService"
 
     - name: Taking backup for {{ service }} dependencies directory
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
-#      when: service == "ManagementServices"
-      
-#    - name: Taking backup for ManagementServices dependencies
-#      copy:
-#         src: "/opt/Application/SN_Wizall/MobifinApps/Management/dependencies"
-#         dest: "/opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
-#         remote_src: yes
 #      when: service == "ManagementServices"
 
     - name: Depploying {{ service }}.jar on {{ service2 }} service
