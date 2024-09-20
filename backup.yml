@@ -40,10 +40,22 @@
          remote_src: yes
       when: service == "ManagementServices"
 
+    - name: Depploying ManagementService.jar on Management service
+      copy: 
+         src: "/root/Ansible/Wizall/MFS-WizallMW/ManagementServices/target/ManagementServices.jar"
+         dest: "/home/akash.banda/Wizall/Management/Apps/"
+      when: service == "ManagementServices" 
+
+    - name: Deploying Management dependencies on Management Service
+         src: "/root/Ansible/Wizall/MFS-WizallMW/ManagementServices/target/dependency-jars"
+         dest: "/home/akash.banda/Wizall/Management/dependencies"
+      when: service == "ManagementServices"   
+
     - name: Restarting ManagementServices
       service:
          name: "SN_MFS_Mgnt.service"
          state: "restarted"
+      when: service == "ManagementServices"   
          
 
       
