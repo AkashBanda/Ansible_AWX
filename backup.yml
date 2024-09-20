@@ -53,6 +53,34 @@
     - set_fact:
        service2: Report
       when: service == "ReportService"  
+
+    - set_fact:
+       service3: SN_MFS_Mgnt.service
+      when: service == "ManagementServices"
+
+    - set_fact:
+       service3: SN_MFS_InternalTrn.service
+      when: service == "InternalTrnService"
+
+    - set_fact:
+       service3: SN_MFS_MW.service
+      when: service == "MobifinWebService"
+
+    - set_fact:
+       service3: SN_MFS_Refund.service
+      when: service == "RefundService"  
+
+    - set_fact:
+       service3: SN_MFS_Settlement.service
+      when: service == "SettlementService"
+
+    - set_fact:
+       service3: SN_MFS_Tub.service
+      when: service == "TUBService"
+
+    - set_fact:
+       service3: SN_MFS_Report.service
+      when: service == "ReportService"  
         
     - name: Taking backup for {{ service }}.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ b }}/"
@@ -93,11 +121,10 @@
          mode: "0755"
 #      when: service == "ManagementServices"   
 
-    - name: Restarting ManagementServices
+    - name: Restarting {{ service3 }} service
       service:
-         name: "SN_MFS_Mgnt.service"
-         state: "restarted"
-      when: service == "ManagementServices"   
+         name: "{{ service3 }}"
+         state: "restarted"   
          
 
       
