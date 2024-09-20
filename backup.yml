@@ -84,7 +84,16 @@
          owner: "mobifin"
          group: "mobifin"
          mode: "0755"
-#      when: service == "ManagementServices"
+      when: service != "InternalTrnService"
+
+    - name: Depploying InternalTransactionService.jar on {{ service2 }} service
+      copy: 
+         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/InternalTransactionService.jar"
+         dest: "/home/akash.banda/Wizall/{{ service2 }}/Apps/"
+         owner: "mobifin"
+         group: "mobifin"
+         mode: "0755"
+      when: service == "InternalTrnService"
 
     - name: Deploying {{ service }} dependencies on {{ service2 }} Service
       copy:
