@@ -57,8 +57,8 @@
 
     - name: Deploying Management dependencies on Management Service
       copy:
-         src: "/root/Ansible/Wizall/MFS-WizallMW/ManagementServices/target/dependency-jars"
-         dest: "/home/akash.banda/Wizall/Management/dependencies"
+         src: "/root/Ansible/Wizall/MFS-WizallMW/ManagementServices/target/dependency-jars/"
+         dest: "/home/akash.banda/Wizall/Management/dependencies/"
       when: service == "ManagementServices"   
 
     - name: Restarting ManagementServices
