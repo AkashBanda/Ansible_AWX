@@ -32,9 +32,10 @@
         state: directory
         mode: "0755"
         
-    - set_fact:
+    - name: Set global current_date for all hosts
+      add_host:
+        name: localhost
         global_current_date: "{{ current_date.stdout }}"
-      delegate_to: localhost  
         
     - set_fact:
        service2: Management
