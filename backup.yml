@@ -96,8 +96,8 @@
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service == "InternalTrnService"
 
-    - name: Taking backup for {{ service }} dependencies directory
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+#    - name: Taking backup for {{ service }} dependencies directory
+#      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
 
     - name: Depploying {{ service }}.jar on {{ service2 }} service
       copy: 
