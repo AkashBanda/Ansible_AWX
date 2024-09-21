@@ -92,5 +92,10 @@
       command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/InternalTransactionService.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/"
       when: service == "InternalTrnService"
 
+    - name: Taking rollback backup for {{ service }}  dependencies
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
+
+    - name: Doing rollback for {{ service }} dependencies
+      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/dependencies /home/akash.banda/Wizall/{{ service2 }}/"
       
     
