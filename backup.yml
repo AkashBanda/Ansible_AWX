@@ -133,6 +133,10 @@
 
 - hosts: localhost
   tasks:
+    - name: Get the current date in YYYY-MM-DD format
+      ansible.builtin.command: "date +%F"
+      register: current_date
+      
     - lineinfile:
         path: "/root/Ansible/var.yml"
         line: "- date: {{ current_date.stdout }}"  
