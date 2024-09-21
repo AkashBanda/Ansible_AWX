@@ -6,10 +6,6 @@
       ansible.builtin.command: "date +%F"
       register: current_date
 
-    - lineinfile:
-        path: "/root/Ansible/var.yml"
-        line: "- date: {{ current_date.stdout }}"  
-
     - name: Ensure the date-based backup directory exists
       ansible.builtin.file:
         path: "/opt/backup/SN/{{ current_date.stdout }}"
@@ -133,6 +129,13 @@
 #      service:
 #         name: "{{ service3 }}"
 #         state: "restarted"   
+
+
+- hosts: localhost
+  tasks:
+    - lineinfile:
+        path: "/root/Ansible/var.yml"
+        line: "- date: {{ current_date.stdout }}"  
          
 
       
