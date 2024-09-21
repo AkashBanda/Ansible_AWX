@@ -8,9 +8,15 @@
         state: directory
         mode: '0755'
 
+    - name: Ensure the service-based rollback directory exists
+      ansible.builtin.file:
+        path: "/opt/rollback/SN/{{ date }}/{{ service}}"
+        state: directory
+        mode: '0755'    
+
     - name: Creating rollback directory
       ansible.builtin.file:
-        path: "/opt/rollback/SN/{{ date }}/{{ Num }}"
+        path: "/opt/rollback/SN/{{ date }}/{{ service}}/{{ Num }}"
         state: directory
         mode: '0755'
         
