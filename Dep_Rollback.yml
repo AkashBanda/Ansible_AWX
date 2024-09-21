@@ -80,7 +80,17 @@
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
       when: service != "InternalTrnService"
 
-    - name: Doing rollback for 
+    - name: Taking rollback backup for InternalTransactionService.jar
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
+      when: service == "InternalTrnService"
+
+    - name: Doing rollback for {{ service }}.jar
       command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/{{ service }}.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/"
       when: service != "InternalTrnService"
+
+    - name: Doing rollback for InternalTransactionService.jar
+      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/InternalTransactionService.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/"
+      when: service == "InternalTrnService"
+
+      
     
