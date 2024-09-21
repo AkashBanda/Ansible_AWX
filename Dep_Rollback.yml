@@ -69,9 +69,12 @@
     - set_fact:
        service3: SN_MFS_Report.service
       when: service == "ReportService"
-    - name: Doing rollback for {{ service }}.jar
+      
+    - name: Taking rollback backup for {{ service }}.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
-      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/{{ service }}.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/" 
       when: service != "InternalTrnService"
-        
+
+    - name: Doing rollback for 
+      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/{{ service }}.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/"
+      when: service != "InternalTrnService"
     
