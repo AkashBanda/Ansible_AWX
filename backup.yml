@@ -31,7 +31,10 @@
         path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}"
         state: directory
         mode: "0755"
-
+        
+    - set_fact:
+        global_current_date: "{{ current_date.stdout }}"
+        
     - set_fact:
        service2: Management
       when: service == "ManagementServices"
@@ -134,14 +137,14 @@
 
 
 - hosts: localhost
-  tasks:
-    - name: Get the current date in YYYY-MM-DD format
-      ansible.builtin.command: "date +%F"
-      register: current_date
+#  tasks:
+#    - name: Get the current date in YYYY-MM-DD format
+#      ansible.builtin.command: "date +%F"
+#      register: current_date
       
     - lineinfile:
         path: "/root/Ansible/var.yml"
-        line: "- date: {{ current_date.stdout }}"  
+        line: "- date: {{ global_current_date }}"     
          
 
       
