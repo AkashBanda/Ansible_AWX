@@ -36,6 +36,7 @@
       add_host:
         name: localhost
         global_current_date: "{{ current_date.stdout }}"
+        Deploy_Num: "{{ b }}"
         
     - set_fact:
        service2: Management
@@ -147,7 +148,10 @@
       
     - lineinfile:
         path: "/root/Ansible/var.yml"
-        line: "- date: {{ hostvars['localhost']['global_current_date'] }}"   
-         
+        line: "- date: {{ hostvars['localhost']['global_current_date'] }}"  
+        
+    - lineinfile:
+        path: "/root/Ansible/var.yml"
+        line: "- Num: {{ hostvars['localhost']['Deploy_Num'] }}"     
 
       
