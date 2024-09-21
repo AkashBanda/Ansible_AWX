@@ -125,27 +125,23 @@
          mode: "0755"
       when: service == "InternalTrnService"
 
-#    - name: Deploying {{ service }} dependencies on {{ service2 }} Service
-#      copy:
-#         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/dependency-jars/"
-#         dest: "/home/akash.banda/Wizall/{{ service2 }}/dependencies/"
-#         owner: "mobifin"
-#         group: "mobifin"
-#         mode: "0755" 
+    - name: Deploying {{ service }} dependencies on {{ service2 }} Service
+      copy:
+         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/dependency-jars/"
+         dest: "/home/akash.banda/Wizall/{{ service2 }}/dependencies/"
+         owner: "mobifin"
+         group: "mobifin"
+         mode: "0755" 
 
-#    - name: Restarting {{ service3 }} service
-#      service:
-#         name: "{{ service3 }}"
-#         state: "restarted"   
+    - name: Restarting {{ service3 }} service
+      service:
+         name: "{{ service3 }}"
+         state: "restarted"   
 
 
 - hosts: localhost
   connection: local
   tasks:
-#    - name: Get the current date in YYYY-MM-DD format
-#      ansible.builtin.command: "date +%F"
-#      register: current_date
-      
     - lineinfile:
         path: "/root/Ansible/var.yml"
         line: "- date: {{ hostvars['localhost']['global_current_date'] }}"  
