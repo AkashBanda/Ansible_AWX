@@ -137,7 +137,7 @@
 
 
 - hosts: localhost
-#  tasks:
+  tasks:
 #    - name: Get the current date in YYYY-MM-DD format
 #      ansible.builtin.command: "date +%F"
 #      register: current_date
