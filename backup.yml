@@ -102,7 +102,6 @@
 
     - name: Taking backup for {{ service }} dependencies directory
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
-#      when: service == "ManagementServices"
 
     - name: Depploying {{ service }}.jar on {{ service2 }} service
       copy: 
@@ -122,19 +121,18 @@
          mode: "0755"
       when: service == "InternalTrnService"
 
-    - name: Deploying {{ service }} dependencies on {{ service2 }} Service
-      copy:
-         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/dependency-jars/"
-         dest: "/home/akash.banda/Wizall/{{ service2 }}/dependencies/"
-         owner: "mobifin"
-         group: "mobifin"
-         mode: "0755"
-#      when: service == "ManagementServices"   
+#    - name: Deploying {{ service }} dependencies on {{ service2 }} Service
+#      copy:
+#         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/dependency-jars/"
+#         dest: "/home/akash.banda/Wizall/{{ service2 }}/dependencies/"
+#         owner: "mobifin"
+#         group: "mobifin"
+#         mode: "0755" 
 
-    - name: Restarting {{ service3 }} service
-      service:
-         name: "{{ service3 }}"
-         state: "restarted"   
+#    - name: Restarting {{ service3 }} service
+#      service:
+#         name: "{{ service3 }}"
+#         state: "restarted"   
          
 
       
