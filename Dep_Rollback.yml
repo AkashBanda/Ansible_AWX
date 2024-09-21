@@ -1,0 +1,22 @@
+- hosts: all
+  vars_files:
+    - /root/Ansible/var.yml 
+  tasks:
+    - name: Ensure the date-based rollback directory exists
+      ansible.builtin.file:
+        path: "/opt/rollback/SN/{{ date }}"
+        state: directory
+        mode: '0755'
+
+    - name: Creating rollback directory
+      ansible.builtin.file:
+        path: "/opt/rollback/SN/{{ date }}/{{ Num }}"
+        state: directory
+        mode: '0755'
+
+    - name: Doing rollback for {{ service }}.jar
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
+      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/{{ service }}.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/" 
+      when: service != "InternalTrnService"
+        
+    
