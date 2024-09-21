@@ -145,7 +145,7 @@
       
     - lineinfile:
         path: "/root/Ansible/var.yml"
-        line: "- date: {{ global_current_date }}"     
+        line: "- date: {{ hostvars['localhost']['global_current_date'] }}"   
          
 
       
