@@ -25,4 +25,4 @@
      - name: "MVN running on {{ service | first }}"
        command:
           cmd: "mvn clean install"
-          chdir: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/{{ service | first }}"
