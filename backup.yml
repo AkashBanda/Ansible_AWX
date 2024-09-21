@@ -91,14 +91,16 @@
     - name: Taking backup for {{ service }}.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service != "InternalTrnService"
+      ignore_errors: yes
 
     - name: Taking backup for InternalTransactionService.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service == "InternalTrnService"
 
-#    - name: Taking backup for {{ service }} dependencies directory
-#      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
-
+    - name: Taking backup for {{ service }} dependencies directory
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+      ignore_errors: yes
+      
     - name: Depploying {{ service }}.jar on {{ service2 }} service
       copy: 
          src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/{{ service }}.jar"
