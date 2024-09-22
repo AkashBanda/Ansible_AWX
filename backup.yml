@@ -44,7 +44,7 @@
       register: output
 
     - debug:
-       msg: {{ output }}
+       msg: "{{ output }}"
 
     - set_fact:
        service2: Internaltrn
