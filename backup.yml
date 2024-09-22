@@ -40,7 +40,7 @@
         
     - set_fact:
        service2: Management
-      when: service == "ManagementServices"
+      when: service == "['ManagementServices']"
 
     - set_fact:
        service2: Internaltrn
