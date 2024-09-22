@@ -42,12 +42,6 @@
        service2: Management
       when: service == "ManagementServices"
       register: output
-      
-    - debug:
-       msg: "{{ service }}"
-    
-    - debug:
-       msg: "{{ output }}"
 
     - set_fact:
        service2: Internaltrn
@@ -103,21 +97,25 @@
         
     - name: Taking backup for {{ service }}.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+#      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service != "InternalTrnService"
       ignore_errors: yes
 
     - name: Taking backup for InternalTransactionService.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+#      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service == "InternalTrnService"
 
     - name: Taking backup for {{ service }} dependencies directory
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+#      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       ignore_errors: yes
       
     - name: Depploying {{ service }}.jar on {{ service2 }} service
       copy: 
          src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/{{ service }}.jar"
          dest: "/home/akash.banda/Wizall/{{ service2 }}/Apps/"
+#         dest: "/opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/"
          owner: "mobifin"
          group: "mobifin"
          mode: "0755"
@@ -127,6 +125,7 @@
       copy: 
          src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/InternalTransactionService.jar"
          dest: "/home/akash.banda/Wizall/{{ service2 }}/Apps/"
+#         dest: "/opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/"
          owner: "mobifin"
          group: "mobifin"
          mode: "0755"
@@ -136,6 +135,7 @@
       copy:
          src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/dependency-jars/"
          dest: "/home/akash.banda/Wizall/{{ service2 }}/dependencies/"
+#         dest: "/opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/dependencies/"
          owner: "mobifin"
          group: "mobifin"
          mode: "0755" 
