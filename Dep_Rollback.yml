@@ -78,24 +78,30 @@
       
     - name: Taking rollback backup for {{ service }}.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
+#      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/{{ service }}.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
       when: service != "InternalTrnService"
 
     - name: Taking rollback backup for InternalTransactionService.jar
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
+#      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/InternalTransactionService.jar /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
       when: service == "InternalTrnService"
 
     - name: Doing rollback for {{ service }}.jar
       command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/{{ service }}.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/"
+#      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/{{ service }}.jar /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/"
       when: service != "InternalTrnService"
 
     - name: Doing rollback for InternalTransactionService.jar
       command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/InternalTransactionService.jar /home/akash.banda/Wizall/{{ service2 }}/Apps/"
+#      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/InternalTransactionService.jar /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/"
       when: service == "InternalTrnService"
 
     - name: Taking rollback backup for {{ service }}  dependencies
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
+#      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/dependencies /opt/rollback/SN/{{ date }}/{{ service }}/{{ Num }}/"
 
     - name: Doing rollback for {{ service }} dependencies
       command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/dependencies /home/akash.banda/Wizall/{{ service2 }}/"
+#      command: "mv /opt/backup/SN/{{ date }}/{{ service }}/{{ Num }}/dependencies /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/"
       
     
