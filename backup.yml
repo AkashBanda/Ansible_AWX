@@ -2,6 +2,10 @@
   vars_files:
     - /root/Ansible/var.yml
   tasks:
+    - name: Load variables from var.yml
+      include_vars:
+        file: "/root/Ansible/var.yml"
+        
     - name: Get the current date in YYYY-MM-DD format
       ansible.builtin.command: "date +%F"
       register: current_date
