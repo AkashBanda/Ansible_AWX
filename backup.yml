@@ -42,7 +42,10 @@
        service2: Management
       when: service == "['ManagementServices']"
       register: output
-
+      
+    - debug:
+       msg: "{{ service }}"
+    
     - debug:
        msg: "{{ output }}"
 
