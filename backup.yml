@@ -41,6 +41,10 @@
     - set_fact:
        service2: Management
       when: service == "['ManagementServices']"
+      register: output
+
+    - debug:
+       msg: {{ output }}
 
     - set_fact:
        service2: Internaltrn
