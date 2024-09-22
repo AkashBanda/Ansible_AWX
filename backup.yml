@@ -2,10 +2,6 @@
   vars_files:
     - /root/Ansible/var.yml
   tasks:
-    - name: Load variables from var.yml
-      include_vars:
-        file: "/root/Ansible/var.yml"
-        
     - name: Get the current date in YYYY-MM-DD format
       ansible.builtin.command: "date +%F"
       register: current_date
@@ -18,13 +14,13 @@
 
     - name: Ensure the Service-based backup directory exists
       ansible.builtin.file:
-        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}"
+        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service | first }}"
         state: directory
         mode: '0755'    
         
     - shell: "ls | wc -l"
       args:
-        chdir: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}/"
+        chdir: "/opt/backup/SN/{{ current_date.stdout }}/{{ service | first }}/"
       register: count
 
     - set_fact:
@@ -32,7 +28,7 @@
 
     - name: Creating Directory for Backup
       file:
-        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}"
+        path: "/opt/backup/SN/{{ current_date.stdout }}/{{ service | first }}/{{ b }}"
         state: directory
         mode: "0755"
         
@@ -98,22 +94,22 @@
        service3: SN_MFS_Report.service
       when: service == "ReportService"  
         
-    - name: Taking backup for {{ service }}.jar
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+    - name: Taking backup for {{ service | first }}.jar
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/{{ service | first }}.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service | first }}/{{ b }}/"
       when: service != "InternalTrnService"
       ignore_errors: yes
 
     - name: Taking backup for InternalTransactionService.jar
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service | first }}/{{ b }}/"
       when: service == "InternalTrnService"
 
-    - name: Taking backup for {{ service }} dependencies directory
-      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
+    - name: Taking backup for {{ service | first }} dependencies directory
+      command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service | first }}/{{ b }}/"
       ignore_errors: yes
       
-    - name: Depploying {{ service }}.jar on {{ service2 }} service
+    - name: Depploying {{ service | first }}.jar on {{ service2 }} service
       copy: 
-         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/{{ service }}.jar"
+         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service | first }}/target/{{ service | first }}.jar"
          dest: "/home/akash.banda/Wizall/{{ service2 }}/Apps/"
          owner: "mobifin"
          group: "mobifin"
@@ -122,22 +118,22 @@
 
     - name: Depploying InternalTransactionService.jar on {{ service2 }} service
       copy: 
-         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/InternalTransactionService.jar"
+         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service | first }}/target/InternalTransactionService.jar"
          dest: "/home/akash.banda/Wizall/{{ service2 }}/Apps/"
          owner: "mobifin"
          group: "mobifin"
          mode: "0755"
       when: service == "InternalTrnService"
 
-    - name: Deploying {{ service }} dependencies on {{ service2 }} Service
+    - name: Deploying {{ service | first }} dependencies on {{ service2 }} Service
       copy:
-         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service }}/target/dependency-jars/"
+         src: "/root/Ansible/Wizall/MFS-WizallMW/{{ service | first }}/target/dependency-jars/"
          dest: "/home/akash.banda/Wizall/{{ service2 }}/dependencies/"
          owner: "mobifin"
          group: "mobifin"
          mode: "0755" 
 
-    - name: Restarting {{ service3 }} service
+    - name: Restarting {{ service | first }} service
       service:
          name: "{{ service3 }}"
          state: "restarted"   
