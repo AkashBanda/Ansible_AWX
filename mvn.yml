@@ -5,6 +5,8 @@
      - command:
           cmd: "git pull"
           chdir: "/root/Ansible/Wizall/MFS-WizallMW/"
+       environment:
+        GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
        register: output
 
      - debug:
