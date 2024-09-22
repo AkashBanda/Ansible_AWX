@@ -2,12 +2,14 @@
   vars_files:
      - /root/Ansible/var.yml
   tasks:
-     - git: 
-        repo: 'git@github.com:panamaxinc/MFS-WizallMW.git'
-        dest: "/root/Ansible/Wizall/MFS-WizallMW/"
-        update: yes
-        version: dev
-        
+     - command:
+          cmd: "git pull"
+          chdir: "/root/Ansible/Wizall/MFS-WizallMW/"
+       register: output
+
+     - debug:
+          msg: "{{ output }}"
+       
      - name: "MVN running on MobifinMainModule"
        command:
           cmd: "mvn clean install"
