@@ -105,6 +105,7 @@
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
 #      command: "mv /opt/Application/SN_Wizall/MobifinApps/{{ service2 }}/Apps/InternalTransactionService.jar /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
       when: service == "InternalTrnService"
+      ignore_errors: yes
 
     - name: Taking backup for {{ service }} dependencies directory
       command: "mv /home/akash.banda/Wizall/{{ service2 }}/dependencies /opt/backup/SN/{{ current_date.stdout }}/{{ service }}/{{ b }}/"
