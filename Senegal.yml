@@ -1,0 +1,8 @@
+- hosts: all
+  vars_files:
+    - /root/Ansible/var.yml
+  tasks:
+    - name: Checking for Senegal Deployment
+      debug:
+        msg: "{{ Senegal }}"
+    
