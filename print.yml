@@ -4,4 +4,4 @@
   tasks:
     - name: "Prosses has been started...!!"
       debug:
-        msg: "I am ansible for {{ service }}"
+        msg: "I am ansible for {{ job.summary_fields.created_by.first_name }}"
